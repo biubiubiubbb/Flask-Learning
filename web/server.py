@@ -21,7 +21,10 @@ def check_login(username, password):
 # 主页面index
 @app.route('/')
 def index():
-    return render_template('index.html')
+    url = '127.0.0.1:5050/index'
+    my_list = [1, 3, 5, 7]
+    my_dict = {'username': 'jake', 'age': 18}
+    return render_template('index.html', url=url, my_list=my_list, my_dict=my_dict)
 
 
 # url参数

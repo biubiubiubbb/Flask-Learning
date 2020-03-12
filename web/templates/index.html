@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的网页</title>
 </head>
+
 <body>
     <p>这是一个段落</p>
     <p>第一行<br>第二行<br>第三行</p>
+    <div>
+        {#变量的使用 render_template传来的参数#}
+        {{url}}<br>
+        {{my_list[0], my_list[1]}}<br>
+        {{my_dict.username, my_dict.age}}<br>
+        {{my_dict['username'], my_dict['age']}}<br>
+        {{url | upper}}<br>     {#过滤器,类似还有lower, title, reverse, sort, sum...#}
+    </div>
+    <div>
+        {#控制代码块的使用#}
+        {%if url == '127.0.0.1:5050'%}
+            {{url}}<br>
+        {%endif%}
+        {%for item in my_list%}
+            {{item}}<br>
+        {%endfor%}
 
+    </div>
 </body>
+
 </html>
