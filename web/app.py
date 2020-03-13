@@ -3,11 +3,17 @@ from werkzeug.utils import secure_filename
 import os
 import sys
 from flask_api import FlaskAPI
+from apis.router_api import Router
+
+import traceback
+
+#路由表
+router = Router() 
 
 app = FlaskAPI(__name__)
 BASEDIR = os.path.abspath(os.path.dirname(sys.argv[0]))  # 调用该模块的py文件的根目录
 app.config.from_pyfile(BASEDIR + '/config.py')
-
+app.config['BASEDIR'] = BASEDIR
 
 # 检测登陆是否正确
 def check_login(username, password):
@@ -26,6 +32,16 @@ def index():
     my_dict = {'username': 'jake', 'age': 18}
     return render_template('index.html', url=url, my_list=my_list, my_dict=my_dict)
 
+@app.route('/browser/<funname>/')
+def api(funname):
+    try:
+        print('api call........')
+        result = router.call(f'browser/{funname}/{request.method}')
+        print('===================================', type(result))
+        return result
+    except:
+        traceback.print_exc()
+    return result
 
 # url参数
 @app.route('/show_user/<username>/<password>')
