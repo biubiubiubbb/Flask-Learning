@@ -12,7 +12,7 @@ class Router:
         def decorator(func):
             funcode = ''
             for value in args:
-                funcode += str(value) + "/"  # gateway/funname/request method
+                funcode += str(value) + '/'  # gateway/funname/request method
             self.fundict[funcode[0:-1]] = func
 
         return decorator
@@ -20,7 +20,7 @@ class Router:
     def call(self, funcode):
         if str(funcode) in self.fundict.keys():
             func = self.fundict[str(funcode)]
-            return func()
+            return func
         else:
             raise Exception(f"无效路由编码:{funcode}")
 
